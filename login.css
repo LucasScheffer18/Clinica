@@ -9,22 +9,29 @@ body {
 }
 
 .login-container {
-    width: 300px;
+    width: 500px;
+    height: 250px;
     padding: 30px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    background: linear-gradient(150deg, #ffffff, #007bff);
 }
 
 h2 {
     color: #333;
     margin-bottom: 20px;
 }
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 .input-group {
     text-align: left;
-    margin-bottom: 15px;
+    
 }
 
 label {
@@ -44,6 +51,7 @@ button {
 }
 
 button {
+    margin-top: 30px;
     background-color: #007bff;
     color: #fff;
     border: none;

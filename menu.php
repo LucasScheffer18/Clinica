@@ -10,13 +10,13 @@
 
 <nav class="menu-container">
     <div class="logo">
-        <img src="clinic_logo.png" alt="Logo da Clínica">
+        <img src="clinicalogo.png" alt="Logo da Clínica">
         <h1>Clínica Médica</h1>
     </div>
     
     <ul class="menu-items">
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Sobre Nós</a></li>
+        <li><a href="menu.php">Início</a></li>
+        <li><a href="login.php">Sair</a></li>
         <li><a href="#">Serviços</a></li>
         <li><a href="#">Especialidades</a></li>
         <li><a href="#">Contato</a></li>
