@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - Clínica Médica</title>
-    <link rel="stylesheet" href="menu.css">
-</head>
-<body>
+<?php require_once("menu_login.php")?>
+<link rel="stylesheet" href="menu.css">
 
 <nav class="menu-container">
     <div class="logo">
@@ -17,10 +10,10 @@
     <ul class="menu-items">
         <li><a href="menu.php">Início</a></li>
         <li><a href="login.php">Sair</a></li>
-        <li><a href="#">Serviços</a></li>
-        <li><a href="#">Especialidades</a></li>
-        <li><a href="#">Contato</a></li>
-        <li><a href="#">Agendar Consulta</a></li>
+        <li><a href="Cadastro_Consulta.php">Serviços</a></li>
+        <li><a href="Cadastro_Historico.php">Especialidades</a></li>
+        <li><a href="Cadastro_Paciente.php">Contato</a></li>
+        <li><a href="Cadastro_Medico.php">Agendar Consulta</a></li>
     </ul>
 </nav>
 

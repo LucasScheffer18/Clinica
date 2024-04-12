@@ -1,55 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Pacientes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-        input[type="text"], input[type="date"], input[type="tel"] {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <form action="#" method="post">
+<?php require_once("menu_login.php")?>
+<link rel="stylesheet" href="style.css">
+
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <h2>Cadastro de Pacientes</h2>
         <!-- Campo paciente_id oculto -->
         <input type="hidden" id="paciente_id" name="paciente_id">
@@ -68,6 +20,30 @@
 
         <input type="submit" value="Cadastrar">
     </form>
+
+    <?php
+    if(isset($_POST["cria"])){
+            $nome = mysqli_real_escape_string($conn, $_POST["nome"]);
+            $nasc =mysqli_real_escape_string($conn,  $_POST["data_nascimento"]);
+            $endereco =mysqli_real_escape_string($conn,  $_POST["endereco"]);
+            $telefone = mysqli_real_escape_string($conn, $_POST["telefone"]);
+
+            $conn = new mysqli("localhost", "root", "", "clinica");
+
+            if($conn){
+                $sql = "INSERT INTO paciente(nome, data_nascimento, endereco, telefone) VALUES ('$nome','$nasc','$endereco', '$telefone')";
+                if(mysqli_query($conn, $sql)){
+                    echo ("
+                    <script>
+                    alert('Conta criada com sucesso');
+                    location.href = 'login.php';
+                    </script>");
+                }
+            }
+
+    }
+    mysqli_close($conn);
+    ?>
 
     <script>
         // Adicionando máscara ao campo de telefone
