@@ -36,7 +36,7 @@
             // Verifica a conexão
             if(isset($_POST['enviar']) == true){
                 // Verifica se os campos foram enviados via POST
-                $sql = "SELECT email, senha FROM medicos";
+                $sql = "SELECT email, senha FROM usuario";
                 $email =mysqli_real_escape_string($conn,  $_POST['email']);
                 $senha =mysqli_real_escape_string($conn,  $_POST['senha']);
 

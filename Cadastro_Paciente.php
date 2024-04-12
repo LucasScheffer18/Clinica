@@ -18,33 +18,32 @@
     <label for="telefone">Telefone:</label>
     <input type="tel" id="telefone" name="telefone" pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}" placeholder="(XX) XXXXX-XXXX" required>
 
-    <input type="submit" name="cria" value="Cadastrar">
+    <input type="submit" name="enviar" value="Cadastrar">
 </form>
 
 <?php
-$conn = new mysqli("localhost", "root", "", "clinica");
-if(isset($_POST["cria"])){
+    $conn = new mysqli("localhost", "root", "", "clinica");
+    if(isset($_POST["enviar"])){
+            $nome = mysqli_real_escape_string($conn, $_POST["nome"]);
+            $nasc =mysqli_real_escape_string($conn,  $_POST["data_nascimento"]);
+            $endereco =mysqli_real_escape_string($conn,  $_POST["endereco"]);
+            $telefone = mysqli_real_escape_string($conn, $_POST["telefone"]);
 
-    if($conn->connect_error){
-        die("Erro na conexão: " . $conn->connect_error);
+
+            if($conn){
+                $sql = "INSERT INTO pacientes(nome, data_nasc, endereco, telefone) VALUES ('$nome','$nasc','$endereco', '$telefone')";
+                if(mysqli_query($conn, $sql)){
+                    echo ("
+                    <script>
+                    alert('Cliente criado com sucesso');
+                    location.href = 'menu.php';
+                    </script>");
+                }
+            }
+
     }
-
-    $nome = $conn->real_escape_string($_POST["nome"]);
-    $nasc = $conn->real_escape_string($_POST["data_nascimento"]);
-    $endereco = $conn->real_escape_string($_POST["endereco"]);
-    $telefone = $conn->real_escape_string($_POST["telefone"]);
-
-    $sql = "INSERT INTO paciente (nome, data_nascimento, endereco, telefone) VALUES ('$nome', '$nasc', '$endereco', '$telefone')";
-
-    if($conn->query($sql) === TRUE){
-        echo "<script>alert('Conta criada com sucesso'); location.href = 'login.php';</script>";
-    } else {
-        echo "Erro ao cadastrar: " . $conn->error;
-    }
-
-    $conn->close();
-}
-?>
+    mysqli_close($conn);
+    ?>
 
 <script>
     // Adicionando máscara ao campo de telefone

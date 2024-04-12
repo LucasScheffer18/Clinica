@@ -24,12 +24,12 @@
     </div>
     
     <ul class="menu-items">
-        <li><a href="menu.php">Início</a></li>
+        <li><a href="menu.php">Inicio</a></li>
+        <li><a href="Cadastro_Consulta.php">Agendar Consulta</a></li>
+        <li><a href="Cadastro_Medico.php">Cadastro Medico</a></li>
+        <li><a href="Cadastro_Paciente.php">Cadastro Paciente</a></li>
+        <li><a href="historico.php">Histórico</a></li>
         <li><a href="login.php">Sair</a></li>
-        <li><a href="Cadastro_Consulta.php">Serviços</a></li>
-        <li><a href="Cadastro_Historico.php">Especialidades</a></li>
-        <li><a href="Cadastro_Paciente.php">Contato</a></li>
-        <li><a href="Cadastro_Medico.php">Agendar Consulta</a></li>
     </ul>
 </nav>
 

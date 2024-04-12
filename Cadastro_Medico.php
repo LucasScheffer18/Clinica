@@ -11,10 +11,27 @@
         <label for="especialidade">Especialidade:</label>
         <input type="text" id="especialidade" name="especialidade" required>
 
-        <input type="submit" value="Cadastrar">
+        <input type="submit" name="enviar" value="Cadastrar">
     </form>
     <?php
         $conn = new mysqli("localhost", "root", "", "clinica");
+        if(isset($_POST['enviar'])){
+            $nome = mysqli_real_escape_string($conn, $_POST["nome"]);
+            $especialidade = mysqli_real_escape_string($conn, $_POST["especialidade"]);
+            
+            if($conn){
+
+                $sql = "INSERT INTO medicos(nome,especialidade) VALUES ('$nome','$especialidade')";
+                if(mysqli_query($conn,$sql)){
+                    echo ("
+                    <script>
+                    alert('Medico criado com sucesso');
+                    location.href = 'menu.php';
+                    </script>");
+                }
+            }
+    
+        }
     ?>
 </body>
 </html>
