@@ -1,4 +1,4 @@
-<?php require_once("menu_login.php")?>
+<?php require_once("menu.php")?>
 <link rel="stylesheet" href="style.css">
 
     <form action="#" method="post">
