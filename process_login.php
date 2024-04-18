@@ -23,7 +23,7 @@ if ($conn->connect_error) {
                 if($registro['email'] == $email){
                     $email_valido = true;
                     if($registro['senha'] == $senha){
-                       
+                    
                         header("Location: menu.php");
                     }
                 }
