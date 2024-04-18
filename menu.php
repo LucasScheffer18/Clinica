@@ -28,7 +28,11 @@
         <li><a href="Cadastro_Consulta.php">Agendar Consulta</a></li>
         <li><a href="Cadastro_Medico.php">Cadastro Medico</a></li>
         <li><a href="Cadastro_Paciente.php">Cadastro Paciente</a></li>
+<<<<<<< HEAD
+        <li><a href="Historico.php">Histórico</a></li>
+=======
         <li><a href="historico.php">Histórico</a></li>
+>>>>>>> 58fe7203e6d775111bc7f0e47ac0995fb9245a7d
         <li><a href="login.php">Sair</a></li>
     </ul>
 </nav>

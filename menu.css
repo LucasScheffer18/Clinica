@@ -1,7 +1,12 @@
 body {
     font-family: Arial, sans-serif;
+<<<<<<< HEAD
+    margin: 0;
+    padding: 0;
+=======
     margin: 0%;
     padding: 0%;
+>>>>>>> 58fe7203e6d775111bc7f0e47ac0995fb9245a7d
 }
 
 .menu-container {
@@ -12,6 +17,10 @@ body {
     align-items: center;
     padding: 10px 30px;
     width: 100%;
+<<<<<<< HEAD
+    height: 120px;
+=======
+>>>>>>> 58fe7203e6d775111bc7f0e47ac0995fb9245a7d
     position: fixed; 
     top: 0; 
     z-index: 1000;
@@ -35,12 +44,10 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    
 }
 
 .menu-items li {
     margin-left: 15px;
-    
 }
 
 .menu-items li a {
@@ -50,17 +57,10 @@ body {
     transition: color 0.3s ease;
     font-size: 16px;
     transition:font-size 0.3s ease;
-    
-
-    
-    
 }
 .menu-items li a:hover {
     font-size: 20px;
     text-decoration: underline;
-
-    
-    
 }
 
 .menu-items li a:hover {
