@@ -50,7 +50,7 @@
                                 $email_valido = true;
                                 if($registro['senha'] == $senha){
                                 
-                                    header("Location: menu.php");
+                                    header("Location: agenda.php");
                                 }else{
                                     echo("<script>alert('Email ou senha Invalida');</script>");
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Abr-2024 às 04:02
+-- Tempo de geração: 19-Abr-2024 às 03:37
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -29,10 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `consultas` (
   `consulta_id` bigint(20) UNSIGNED NOT NULL,
-  `data_consulta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `data_consulta` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `pacientes_id` int(11) NOT NULL,
   `medicos_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `consultas`
+--
+
+INSERT INTO `consultas` (`consulta_id`, `data_consulta`, `pacientes_id`, `medicos_id`) VALUES
+(1, '2024-06-05 06:30:00', 6, 5),
+(2, '2024-04-26 12:40:00', 8, 6);
 
 -- --------------------------------------------------------
 
@@ -45,9 +53,19 @@ CREATE TABLE `historico` (
   `diagnostico` text NOT NULL,
   `tratamento` text NOT NULL,
   `prescricao` text NOT NULL,
+  `data_historico` date NOT NULL,
   `pacientes_id` int(11) NOT NULL,
-  `consultas_id` int(11) NOT NULL
+  `medico_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `historico`
+--
+
+INSERT INTO `historico` (`historico_id`, `diagnostico`, `tratamento`, `prescricao`, `data_historico`, `pacientes_id`, `medico_id`) VALUES
+(1, 'Denge', 'Acontece', 'Repouso por 7 dias', '2024-04-15', 6, 5),
+(2, 'HIV', 'Fases da vida', 'Nascer novamente', '2024-04-19', 8, 6),
+(3, 'Gravides', 'Sofrer', 'Aceita', '2024-04-09', 7, 5);
 
 -- --------------------------------------------------------
 
@@ -66,7 +84,8 @@ CREATE TABLE `medicos` (
 --
 
 INSERT INTO `medicos` (`medico_id`, `nome`, `especialidade`) VALUES
-(5, 'Dr.Hanns Chucrute', 'Otorrinolaringologista');
+(5, 'Dr.Hanns Chucrute', 'Otorrinolaringologista'),
+(6, 'Dr.Jubileu', 'Cardiologista');
 
 -- --------------------------------------------------------
 
@@ -87,7 +106,9 @@ CREATE TABLE `pacientes` (
 --
 
 INSERT INTO `pacientes` (`paciente_id`, `nome`, `data_nasc`, `endereco`, `telefone`) VALUES
-(6, 'Raissa Maciel Machado', '2024-04-09', 'Parobé', '(35) 32523-5235');
+(6, 'Raissa Maciel Machado', '2024-04-09', 'Parobé', '(35) 32523-5235'),
+(7, 'Raissa Maciel Machado', '2016-05-18', 'Parobé', '(51) 55574-7454'),
+(8, 'Gabriel', '2007-06-18', 'Rolante', '(55) 38572-3923');
 
 -- --------------------------------------------------------
 
@@ -154,25 +175,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `consulta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `consulta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `historico_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `historico_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `medico_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `medico_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `paciente_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `paciente_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
