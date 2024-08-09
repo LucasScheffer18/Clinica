@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: ./db
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: clinicadb
+      MYSQL_DATABASE: clinica
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - backend
+
+  usuarios:
+    build:
+      context: ./usuarios
+    container_name: usuarios-container
+    environment:
+      MYSQL_ROOT_PASSWORD: usuariosdb
+      MYSQL_DATABASE: usuarios
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_usuarios_data:/var/lib/mysql
+    networks:
+      - backend
+
+  php:
+    build:
+      context: ./php
+    container_name: php-container
+    volumes:
+      - ./php:/var/www/html
+    depends_on:
+      - db
+      - node
+    ports:
+      - "80:80"
+    networks:
+      - backend
+      - frontend
+
+  node:
+    build:
+      context: ./node
+    container_name: node-container
+    volumes:
+      - ./node:/usr/src/app
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+      - frontend
+  
+  login:
+    build: 
+      context: ./login
+    container_name: login-container
+    ports:
+      - "3002:3002"
+    depends_on:
+      - usuarios
+    networks:
+      - backend
+
+volumes:
+  db_data:
+  db_usuarios_data:
+
+networks:
+  backend:
+  frontend:
