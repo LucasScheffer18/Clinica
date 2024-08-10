@@ -41,7 +41,7 @@ if(isset($_POST['enviar'])){
         echo ("
         <script>
         alert('Médico criado com sucesso');
-        location.href = 'menu.php';
+        location.href = 'agenda.php';
         </script>");
     }
 }
