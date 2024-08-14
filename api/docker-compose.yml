@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   db:
@@ -14,6 +14,11 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pclinicadb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   usuarios:
     build:
@@ -28,6 +33,12 @@ services:
       - db_usuarios_data:/var/lib/mysql
     networks:
       - backend
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pusuariosdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 
   php:
     build:
@@ -36,8 +47,10 @@ services:
     volumes:
       - ./php:/var/www/html
     depends_on:
-      - db
-      - node
+      db:
+        condition: service_healthy
+      node:
+        condition: service_started
     ports:
       - "80:80"
     networks:
@@ -51,7 +64,8 @@ services:
     volumes:
       - ./node:/usr/src/app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "3000:3000"
     networks:
@@ -65,7 +79,8 @@ services:
     ports:
       - "3002:3002"
     depends_on:
-      - usuarios
+      usuarios:
+        condition: service_healthy
     networks:
       - backend
 

@@ -30,15 +30,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `consultas` (
   `consulta_id` bigint(20) UNSIGNED NOT NULL,
   `data_consulta` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `pacientes_id` int(11) NOT NULL,
-  `medicos_id` int(11) NOT NULL
+  `paciente_id` int(11) NOT NULL,
+  `medico_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `consultas`
 --
 
-INSERT INTO `consultas` (`consulta_id`, `data_consulta`, `pacientes_id`, `medicos_id`) VALUES
+INSERT INTO `consultas` (`consulta_id`, `data_consulta`, `paciente_id`, `medico_id`) VALUES
 (1, '2024-06-05 06:30:00', 6, 5),
 (2, '2024-04-26 12:40:00', 8, 6);
 
@@ -54,7 +54,7 @@ CREATE TABLE `historico` (
   `tratamento` text NOT NULL,
   `prescricao` text NOT NULL,
   `data_historico` date NOT NULL,
-  `pacientes_id` int(11) NOT NULL,
+  `paciente_id` int(11) NOT NULL,
   `medico_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -62,7 +62,7 @@ CREATE TABLE `historico` (
 -- Extraindo dados da tabela `historico`
 --
 
-INSERT INTO `historico` (`historico_id`, `diagnostico`, `tratamento`, `prescricao`, `data_historico`, `pacientes_id`, `medico_id`) VALUES
+INSERT INTO `historico` (`historico_id`, `diagnostico`, `tratamento`, `prescricao`, `data_historico`, `paciente_id`, `medico_id`) VALUES
 (1, 'Denge', 'Acontece', 'Repouso por 7 dias', '2024-04-15', 6, 5),
 (2, 'HIV', 'Fases da vida', 'Nascer novamente', '2024-04-19', 8, 6),
 (3, 'Gravides', 'Sofrer', 'Aceita', '2024-04-09', 7, 5);

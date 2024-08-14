@@ -54,7 +54,7 @@ app.get('/consultas', (req, res) => {
     const data_fim = req.query.data_fim;
     console.log('Consultas request received:', data_inicio, data_fim);
 
-    const sql = 'SELECT pacientes_id, data_consulta FROM consultas WHERE data_consulta BETWEEN ? AND ?';
+    const sql = 'SELECT paciente_id, data_consulta FROM consultas WHERE data_consulta BETWEEN ? AND ?';
     db.query(sql, [data_inicio, data_fim], (err, results) => {
         if (err) {
             console.error('Erro ao executar a consulta:', err);
@@ -101,7 +101,7 @@ app.post('/consultas', (req, res) => {
     const { data_consulta, paciente_id, medico_id } = req.body;
     console.log('Request to add consultation received:', data_consulta, paciente_id, medico_id);
 
-    const sql = 'INSERT INTO consultas (data_consulta, pacientes_id, medicos_id) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO consultas (data_consulta, paciente_id, medico_id) VALUES (?, ?, ?)';
     db.query(sql, [data_consulta, paciente_id, medico_id], (err, result) => {
         if (err) {
             console.error('Erro ao cadastrar consulta:', err);
