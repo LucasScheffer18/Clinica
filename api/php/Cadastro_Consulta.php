@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
+<?php
 // Função para enviar requisição ao backend Node.js
 function enviarParaBackend($url, $data = null) {
     $ch = curl_init($url);

@@ -30,7 +30,7 @@
         <li><a href="Cadastro_Paciente.php">Cadastro Paciente</a></li>
         <li><a href="diagnostico.php">Diagnóstico</a></li>
         <li><a href="historico.php">Historico</a></li>
-        <li><a href="login.php">Sair</a></li>
+        <li><a href="logout.php">Sair</a></li>
     </ul>
 </nav>
 

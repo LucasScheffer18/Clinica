@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
@@ -18,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
     $responseData = json_decode($response, true);
 
     if (isset($responseData['message']) && $responseData['message'] === 'Login bem-sucedido') {
+        $_SESSION['loggedin'] = true;
         header("Location: agenda.php");
         exit();
     } else {
