@@ -27,11 +27,20 @@
             border: 1px solid #ccc;
             text-align: left;
         }
-        th {
-            background-color: #f2f2f2;
+        tr{
+            background-color: #000;
+            color: white;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+
+        tbody tr:nth-child(even) {
+            background-color: #F8F8FF;
+            color: black;
+        }
+        
+        /* Linhas ímpares */
+       tbody tr:nth-child(odd) {
+            background-color: #808080;
+            color: white;
         }
     </style>
 </head>
