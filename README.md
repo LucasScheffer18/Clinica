@@ -1,4 +1,13 @@
-<h1 align="center"> Clínica Médica </h1><br>
+
+<div align="center" > 
+  <img width="150px" src="https://github.com/user-attachments/assets/9576241b-8933-4507-8e71-d23337fb7d18"/>
+  <h1> Clínica Médica </h1><br>
+</div>
+
+<p align="center">
+  <a href="#descrição">Descrição</a> •
+  <a href="#funcionalidades">Funcionalidades</a>
+</p> 
 
 <h2 align="center">Descrição</h2><br>
 Este projeto é um sistema de gerenciamento para clínicas médicas, desenvolvido para otimizar o atendimento e a organização interna. 
