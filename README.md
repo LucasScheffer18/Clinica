@@ -68,5 +68,5 @@ docker-compose up --build
 
 ```
 Email de teste: admin@gmail.com
-Senha teste: 1234
+Senha de teste: 1234
 ```
