@@ -48,11 +48,6 @@ proporcionando uma visão clara e organizada de suas atividades.
 - `Frameworks\Bootstrap`
 
 <h2 align="center">📁 Acesso aos Arquivos do Projeto</h2>
-
-Usuário de Teste:
->Login: admin@gmail.com <br>
->Senha: 1234
-
 <h3> 🛠️ Abrir e Rodar o Projeto </h3>
 
 ```
@@ -69,4 +64,9 @@ Reinicie e Reconstrua:
 ```
 docker restart <container_id>
 docker-compose up --build
+```
+```
+Usuário de Teste
+Login: admin@gmail.com <br>
+Senha: 1234
 ```
