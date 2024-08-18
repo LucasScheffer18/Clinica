@@ -49,7 +49,7 @@ proporcionando uma visão clara e organizada de suas atividades.
 
 <h2 align="center">📁 Acesso aos Arquivos do Projeto</h2>
 
-Primeiro acesso:
+Usuário de Teste:
 >Login: admin@gmail.com <br>
 >Senha: 1234
 
@@ -69,9 +69,4 @@ Reinicie e Reconstrua:
 ```
 docker restart <container_id>
 docker-compose up --build
-```
-
-```
-Email de teste: admin@gmail.com
-Senha de teste: 1234
 ```
