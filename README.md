@@ -67,6 +67,6 @@ docker-compose up --build
 ```
 ```
 Usuário de Teste
-Login: admin@gmail.com <br>
+Login: admin@gmail.com
 Senha: 1234
 ```
