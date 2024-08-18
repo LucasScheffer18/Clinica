@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const db = mysql.createConnection({
-    host: 'db', // Nome do serviço do banco de dados no Docker Compose
+    host: 'db', // Nome do serviï¿½o do banco de dados no Docker Compose
     user: 'root',
     password: 'clinicadb',
     database: 'clinica'
@@ -43,27 +43,40 @@ app.post('/login', (req, res) => {
                 res.status(401).json({ error: 'Senha incorreta' });
             }
         } else {
-            res.status(404).json({ error: 'Usuário não encontrado' });
+            res.status(404).json({ error: 'Usuï¿½rio nï¿½o encontrado' });
         }
     });
 });
 
-
 app.get('/consultas', (req, res) => {
-    const data_inicio = req.query.data_inicio;
-    const data_fim = req.query.data_fim;
-    console.log('Consultas request received:', data_inicio, data_fim);
+    const sql = `
+        SELECT 
+            c.consulta_id,
+            c.data_consulta,
+            c.paciente_id,
+            p.nome AS paciente_nome,
+            c.medico_id,
+            m.nome AS medico_nome
+        FROM 
+            consultas c
+        JOIN 
+            pacientes p ON c.paciente_id = p.paciente_id
+        JOIN 
+            medicos m ON c.medico_id = m.medico_id
+        ORDER BY 
+            c.data_consulta DESC;
+    `;
 
-    const sql = 'SELECT paciente_id, data_consulta FROM consultas WHERE data_consulta BETWEEN ? AND ?';
-    db.query(sql, [data_inicio, data_fim], (err, results) => {
+    db.query(sql, (err, results) => {
         if (err) {
-            console.error('Erro ao executar a consulta:', err);
-            return res.status(500).json({ error: 'Erro ao executar a consulta' });
+            console.error('Erro ao buscar consultas:', err);
+            return res.status(500).json({ error: 'Erro ao buscar consultas' });
         }
-        console.log('Consultas query results:', results);
         res.status(200).json(results);
     });
 });
+
+
 
 
 // Obter pacientes
@@ -81,14 +94,14 @@ app.get('/pacientes', (req, res) => {
 });
 
 
-// Obter médicos
+// Obter mï¿½dicos
 app.get('/medicos', (req, res) => {
     console.log('Request to get doctors received');
     const sql = 'SELECT medico_id, nome FROM medicos';
     db.query(sql, (err, results) => {
         if (err) {
-            console.error('Erro ao obter médicos:', err);
-            return res.status(500).json({ error: 'Erro ao obter médicos' });
+            console.error('Erro ao obter mï¿½dicos:', err);
+            return res.status(500).json({ error: 'Erro ao obter mï¿½dicos' });
         }
         console.log('Doctors query results:', results);
         res.status(200).json({ medicos: results });
@@ -113,7 +126,7 @@ app.post('/consultas', (req, res) => {
 });
 
 
-// Cadastrar médico
+// Cadastrar mï¿½dico
 app.post('/medicos', (req, res) => {
     const { nome, especialidade } = req.body;
     console.log('Request to add doctor received:', nome, especialidade);
@@ -121,8 +134,8 @@ app.post('/medicos', (req, res) => {
     const sql = 'INSERT INTO medicos (nome, especialidade) VALUES (?, ?)';
     db.query(sql, [nome, especialidade], (err, result) => {
         if (err) {
-            console.error('Erro ao cadastrar médico:', err);
-            return res.status(500).json({ error: 'Erro ao cadastrar médico' });
+            console.error('Erro ao cadastrar mï¿½dico:', err);
+            return res.status(500).json({ error: 'Erro ao cadastrar mï¿½dico' });
         }
         console.log('Doctor added successfully:', result);
         res.status(200).json({ success: true });
@@ -147,7 +160,7 @@ app.post('/pacientes', (req, res) => {
 });
 
 
-// Cadastrar histórico
+// Cadastrar histï¿½rico
 app.post('/historico', (req, res) => {
     const { diagnostico, tratamento, prescricao, paciente_id, medico_id, data_diagnostico } = req.body;
     console.log('Request to add historical record received:', diagnostico, tratamento, prescricao, paciente_id, medico_id, data_diagnostico);
@@ -155,8 +168,8 @@ app.post('/historico', (req, res) => {
     const sql = 'INSERT INTO historico (diagnostico, tratamento, prescricao, paciente_id, medico_id, data_historico) VALUES (?, ?, ?, ?, ?, ?)';
     db.query(sql, [diagnostico, tratamento, prescricao, paciente_id, medico_id, data_diagnostico], (err, result) => {
         if (err) {
-            console.error('Erro ao cadastrar histórico:', err);
-            return res.status(500).json({ error: 'Erro ao cadastrar histórico' });
+            console.error('Erro ao cadastrar histï¿½rico:', err);
+            return res.status(500).json({ error: 'Erro ao cadastrar histï¿½rico' });
         }
         console.log('Historical record added successfully:', result);
         res.status(200).json({ success: true });
@@ -164,14 +177,14 @@ app.post('/historico', (req, res) => {
 });
 
 
-// Obter histórico de diagnósticos
+// Obter histï¿½rico de diagnï¿½sticos
 app.get('/historico', (req, res) => {
     console.log('Request to get historical records received');
     const sql = `SELECT nome ,diagnostico,data_historico FROM historico,pacientes where historico.paciente_id = pacientes.paciente_id`;
     db.query(sql, (err, results) => {
         if (err) {
-            console.error('Erro ao obter histórico de diagnósticos:', err);
-            return res.status(500).json({ error: 'Erro ao obter histórico de diagnósticos' });
+            console.error('Erro ao obter histï¿½rico de diagnï¿½sticos:', err);
+            return res.status(500).json({ error: 'Erro ao obter histï¿½rico de diagnï¿½sticos' });
         }
         console.log('Historical records query results:', results);
         res.status(200).json(results);
@@ -180,7 +193,7 @@ app.get('/historico', (req, res) => {
 
 
 
-// Adicionar diagnóstico
+// Adicionar diagnï¿½stico
 app.post('/diagnostico', (req, res) => {
     const { diagnostico, tratamento, prescricao, paciente_id, medico_id, data_diagnostico } = req.body;
     console.log('Request to add diagnosis received:', diagnostico, tratamento, prescricao, paciente_id, medico_id, data_diagnostico);
@@ -191,8 +204,8 @@ app.post('/diagnostico', (req, res) => {
     `;
     db.query(sql, [diagnostico, tratamento, prescricao, paciente_id, medico_id, data_diagnostico], (err, result) => {
         if (err) {
-            console.error('Erro ao adicionar diagnóstico:', err);
-            return res.status(500).json({ error: 'Erro ao adicionar diagnóstico' });
+            console.error('Erro ao adicionar diagnï¿½stico:', err);
+            return res.status(500).json({ error: 'Erro ao adicionar diagnï¿½stico' });
         }
         console.log('Diagnosis added successfully:', result);
         res.status(200).json({ success: true });
@@ -203,7 +216,7 @@ app.post('/register', (req, res) => {
   const { email, senha } = req.body;
 
   if (!email || !senha) {
-    return res.status(400).json({ error: 'Email e senha são obrigatórios' });
+    return res.status(400).json({ error: 'Email e senha sï¿½o obrigatï¿½rios' });
   }
 
   // Criptografa a senha
@@ -216,11 +229,11 @@ app.post('/register', (req, res) => {
     const query = 'INSERT INTO usuario (email, senha) VALUES (?, ?)';
     db.query(query, [email, hashedSenha], (err, results) => {
       if (err) {
-        console.error('Erro ao inserir usuário:', err);
+        console.error('Erro ao inserir usuï¿½rio:', err);
         return res.status(500).json({ error: 'Erro no servidor' });
       }
 
-      res.status(201).json({ message: 'Usuário criado com sucesso', userId: results.insertId });
+      res.status(201).json({ message: 'Usuï¿½rio criado com sucesso', userId: results.insertId });
     });
   });
 });

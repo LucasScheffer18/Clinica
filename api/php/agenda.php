@@ -17,7 +17,6 @@ curl_setopt($ch, CURLOPT_URL, "http://node-container:3000/consultas?data_inicio=
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
 curl_close($ch);
-
 $consultas = json_decode($response, true);
 ?>
 <!DOCTYPE html>
@@ -26,80 +25,126 @@ $consultas = json_decode($response, true);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Adicione estilos conforme necessário */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 110vh;
-            flex-direction: column;
-            overflow:hidden;
-            margin-top: 15px;
+            display: block;
+            margin-top: 150px;
+        }
+        h1 {
+            text-align: center;
+            color: white;
         }
         table {
-            width: 80%; /* Defina o tamanho da tabela conforme necessário */
+            width: 96.5%;
             border-collapse: collapse;
-            background-color: #f4f4f4;
+            margin-left: 30px;
+            margin-top: 30px;
         }
         th, td {
-            border: 1px solid #000;
-            padding: 6px;
+            padding: 8px;
+            border: 1px solid #ccc;
             text-align: left;
-            width: 100px;
         }
-        th {
-            background-color: #f2f2f2;
+        tr{
+            background-color: #000;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #F8F8FF;
+            color: black;
+        }
+        
+        /* Linhas ímpares */
+       tbody tr:nth-child(odd) {
+            background-color: #808080;
+            color: white;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+
+            table, th, td {
+                display: block;
+            }
+
+            th, td {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            td {
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 45%;
+                padding-left: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+            }
         }
     </style>
 </head>
 <body>
+    <h1>Consultas Agendadas</h1>
     <table>
-        <tr>
-            <th>Hora</th>
+        <thead>
+            <tr>
+                <th>ID da Consulta</th>
+                <th>Paciente</th>
+                <th>Médico</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
-            // Crie cabeçalhos para cada dia da semana
-            $dias_semana = array('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta');
-            foreach ($dias_semana as $dia) {
-                echo "<th>$dia</th>";
+            // URL da API
+            $url = "http://node-container:3000/consultas"; // Substitua pelo endereço correto
+
+            // Inicializa o cURL
+            $ch = curl_init();
+
+            // Configurações do cURL
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPGET, true);
+
+            // Executa a requisição e armazena a resposta
+            $response = curl_exec($ch);
+
+            // Verifica se houve erro
+            if (curl_errno($ch)) {
+                echo '<tr><td colspan="4">Erro ao se conectar à API: ' . curl_error($ch) . '</td></tr>';
+                curl_close($ch);
+                exit;
+            }
+
+            // Fecha a conexão cURL
+            curl_close($ch);
+
+            // Decodifica a resposta JSON
+            $consultas = json_decode($response, true);
+
+            // Verifica se o retorno não está vazio
+            if (!empty($consultas)) {
+                foreach ($consultas as $consulta) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($consulta['consulta_id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($consulta['paciente_nome']) . "</td>";
+                    echo "<td>" . htmlspecialchars($consulta['medico_nome']) . "</td>";
+                    echo "<td>" . htmlspecialchars($consulta['data_consulta']) . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo '<tr><td colspan="4">Nenhuma consulta encontrada.</td></tr>';
             }
             ?>
-        </tr>
-
-        <?php
-        // Exibir as consultas processadas
-        $horas_dia = range(9, 18); // Horário de funcionamento da clínica (por exemplo, 8h às 16h)
-        foreach ($horas_dia as $hora) {
-            for ($minuto = 0; $minuto < 60; $minuto += 30) {
-                $hora_formatada = str_pad($hora, 2, '0', STR_PAD_LEFT); // Adiciona um zero à esquerda, se necessário
-                $minuto_formatado = str_pad($minuto, 2, '0', STR_PAD_LEFT); // Adiciona um zero à esquerda, se necessário
-                $hora_completa = "$hora_formatada:$minuto_formatado";
-                echo "<tr>";
-                echo "<td>$hora_completa</td>";
-
-                // Loop para cada dia da semana
-                foreach ($dias_semana as $dia) {
-                    // Verifique se há uma consulta para esta hora e dia
-                    $consulta_encontrada = false;
-                    foreach ($consultas as $consulta) {
-                        if (date('l', strtotime($consulta['data_consulta'])) == $dia && date('H:i', strtotime($consulta['hora_consulta'])) == $hora_completa) {
-                            // Consulta encontrada para esta hora e dia
-                            $consulta_encontrada = true;
-                            echo "<td>{$consulta['nome_paciente']} - {$consulta['nome_medico']}</td>";
-                            break;
-                        }
-                    }
-                    if (!$consulta_encontrada) {
-                        echo "<td></td>";
-                    }
-                }
-                echo "</tr>";
-            }
-        }
-        ?>
+        </tbody>
     </table>
 </body>
 </html>
