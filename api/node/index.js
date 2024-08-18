@@ -76,6 +76,24 @@ app.get('/consultas', (req, res) => {
     });
 });
 
+app.delete('/consultas/:id', (req, res) => {
+    const consultaId = req.params.id;
+
+    const sql = 'DELETE FROM consultas WHERE consulta_id = ?';
+
+    db.query(sql, [consultaId], (err, result) => {
+        if (err) {
+            console.error('Erro ao excluir a consulta:', err);
+            return res.status(500).json({ error: 'Erro ao excluir a consulta' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Consulta não encontrada' });
+        }
+
+        res.status(200).json({ message: 'Consulta excluída com sucesso' });
+    });
+});
 
 
 
