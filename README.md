@@ -11,8 +11,7 @@
 * [Funcionalidades](#-hammer-funcionalidades)
 * [Tecnologias Utilizadas](#-woman_technologist-tecnologias-utilizadas)
 * [Acesso ao Projeto](#-acesso-aos-arquivos-do-projeto)
-* Email de teste: admin@gmail.com
-* Senha: 1234
+
 
 <h2 align="center">Descrição</h2>
 Este projeto é um sistema de gerenciamento para clínicas médicas, desenvolvido para otimizar o atendimento e a organização interna. 
