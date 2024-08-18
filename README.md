@@ -65,3 +65,8 @@ Reinicie e Reconstrua:
 docker restart <container_id>
 docker-compose up --build
 ```
+
+```
+Email de teste: admin@gmail.com
+Senha teste: 1234
+```
