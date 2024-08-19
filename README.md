@@ -75,8 +75,8 @@ https://www.youtube.com/watch?v=I6ulDRIK1Jk
 
 <h2 align="center">Integrantes</h2>
 
-- gabriel_rost
+- gabriel-rost
 - LucasScheffer18
 - theraissa
-- Mauricio507
+- Mauricio570
 - SamuelVLuz
