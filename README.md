@@ -43,7 +43,7 @@ proporcionando uma visão clara e organizada de suas atividades.
 
 - `PHP`
 - `HTML, CSS e JS`
-- `Docker e Arquituta de Microsserviços `
+- `Docker e Arquitetuta de Microsserviços `
 - `Metologia de MySQL`
 - `Frameworks\Bootstrap`
 
