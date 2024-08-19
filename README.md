@@ -70,3 +70,13 @@ Usuário de Teste
 Login: admin@gmail.com
 Senha: 1234
 ```
+<h2 align="center">:camera: Vídeo sobre o Projeto</h2>
+https://www.youtube.com/watch?v=I6ulDRIK1Jk
+
+<h2 align="center">Integrantes</h2>
+
+- gabriel_rost
+- LucasScheffer18
+- theraissa
+- Mauricio507
+- samueldeluz
